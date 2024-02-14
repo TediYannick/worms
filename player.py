@@ -17,8 +17,8 @@ class Player:
         self.velocity_y += self.gravity
         self.rect.y += self.velocity_y
 
-        if self.rect.bottom >= self.screen.get_height():
-            self.rect.bottom = self.screen.get_height()
+        if self.rect.bottom >= self.screen.get_height() // 1.5:
+            self.rect.bottom = self.screen.get_height() // 1.5
             self.velocity_y = 0
 
         if self.is_moving_left:  # Vérifie si la touche de déplacement à gauche est enfoncée
@@ -39,7 +39,7 @@ class Player:
         self.is_moving_right = False  # Met à False lorsque la touche est relâchée
 
     def jump(self):
-        if self.rect.bottom == self.screen.get_height():
+        if self.rect.bottom == self.screen.get_height() // 1.5:
             self.velocity_y = -10
 
     def draw(self):
