@@ -1,6 +1,7 @@
 import pygame
 from player import Player
 from map import Map
+from tools import angle
 
 pygame.init()
 
@@ -17,6 +18,9 @@ game_map = Map(screen)
 
 # Créer une instance de la classe Player
 player = Player(screen)
+
+# Charger une police de caractères
+font = pygame.font.Font(None, 36)
 
 running = True
 while running:
@@ -47,7 +51,24 @@ while running:
     # Afficher le joueur
     player.draw()
 
+    # Récupérer la position de la souris
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+
+    angle_deg = angle(player.rect.x, player.rect.y, pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1])
+
+    # Créer une surface contenant le texte de la position du joueur
+    text_surface1 = font.render(f"Position: ({player.rect.x}, {player.rect.y})", True, (255, 0, 0))
+    text_surface2 = font.render(f"Position souris: ({mouse_x}, {mouse_y})", True, (255, 0, 0))
+    text_surface3 = font.render(f"angle°: ({angle_deg}", True, (255, 0, 0))
+
+    # Dessiner le texte sur la fenêtre à une position spécifique
+    screen.blit(text_surface1, ( 10, 10))
+    screen.blit(text_surface2, ( 10, 46))
+    screen.blit(text_surface3, ( 10, 76))
+
     # Mettre à jour l'affichage
     pygame.display.flip()
+
+
 
 pygame.quit()

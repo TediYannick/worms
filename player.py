@@ -21,9 +21,9 @@ class Player:
             self.rect.bottom = self.screen.get_height() // 1.5
             self.velocity_y = 0
 
-        if self.is_moving_left:  # Vérifie si la touche de déplacement à gauche est enfoncée
+        if self.is_moving_left and self.rect.x >= 0:  # Vérifie si la touche de déplacement à gauche est enfoncée
             self.rect.x -= 5
-        if self.is_moving_right:  # Vérifie si la touche de déplacement à droite est enfoncée
+        if self.is_moving_right and self.rect.x <= self.screen.get_width() - 32:  # Vérifie si la touche de déplacement à droite est enfoncée
             self.rect.x += 5
 
     def move_left(self):
