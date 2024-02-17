@@ -2,6 +2,7 @@ import pygame
 from player import Player
 from map import Map
 from tools import angle
+from projectile import Projectile  # Importez la classe Projectile
 
 pygame.init()
 
@@ -10,17 +11,13 @@ screen_info = pygame.display.Info()
 screen_width = screen_info.current_w
 screen_height = screen_info.current_h
 
-# Créer la fenêtre en mode plein écran
 screen = pygame.display.set_mode((screen_width, screen_height))
 
-# Créer une instance de la classe Map
 game_map = Map(screen)
-
-# Créer une instance de la classe Player
 player = Player(screen)
-
-# Charger une police de caractères
 font = pygame.font.Font(None, 36)
+
+power = 0  # Initialisez la puissance du projectile
 
 running = True
 while running:
@@ -30,45 +27,40 @@ while running:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:  # Appuyez sur la touche ESC pour quitter
                 running = False
-            elif event.key == pygame.K_LEFT:  # Appuyez sur la flèche gauche pour déplacer le personnage vers la gauche
+            elif event.key == pygame.K_LEFT: 
                 player.move_left()
-            elif event.key == pygame.K_RIGHT:  # Appuyez sur la flèche droite pour déplacer le personnage vers la droite
+            elif event.key == pygame.K_RIGHT:  
                 player.move_right()
-            elif event.key == pygame.K_SPACE:  # Appuyez sur la barre d'espace pour faire sauter le personnage
+            elif event.key == pygame.K_SPACE:  
                 player.jump()
         elif event.type == pygame.KEYUP:
-            if event.key == pygame.K_LEFT:  # Relâchez la touche gauche pour arrêter le déplacement vers la gauche
+            if event.key == pygame.K_LEFT:  
                 player.stop_left()
-            elif event.key == pygame.K_RIGHT:  # Relâchez la touche droite pour arrêter le déplacement vers la droite
+            elif event.key == pygame.K_RIGHT: 
                 player.stop_right()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 4 and power <= 99:  # Molette vers le haut
+                power += 1
+            elif event.button == 5 and power >= 1:  # Molette vers le bas
+                power -= 1
 
-    # Appliquer la gravité et mettre à jour la position du joueur
     player.update()
-
-    # Afficher la carte
     game_map.draw()
-
-    # Afficher le joueur
     player.draw()
 
-    # Récupérer la position de la souris
-    mouse_x, mouse_y = pygame.mouse.get_pos()
 
     angle_deg = angle(player.rect.x, player.rect.y, pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1])
 
-    # Créer une surface contenant le texte de la position du joueur
     text_surface1 = font.render(f"Position: ({player.rect.x}, {player.rect.y})", True, (255, 0, 0))
-    text_surface2 = font.render(f"Position souris: ({mouse_x}, {mouse_y})", True, (255, 0, 0))
-    text_surface3 = font.render(f"angle°: ({angle_deg}", True, (255, 0, 0))
+    text_surface2 = font.render(f"Position souris: ({pygame.mouse.get_pos()[0]}, { pygame.mouse.get_pos()[1]})", True, (255, 0, 0))
+    text_surface3 = font.render(f"angle°: ({round(angle_deg)}°)", True, (255, 0, 0))
+    text_surface4 = font.render(f"power: ({power} % )", True, (255, 0, 0))
 
-    # Dessiner le texte sur la fenêtre à une position spécifique
-    screen.blit(text_surface1, ( 10, 10))
-    screen.blit(text_surface2, ( 10, 46))
-    screen.blit(text_surface3, ( 10, 76))
+    screen.blit(text_surface1, (10, 10))
+    screen.blit(text_surface2, (10, 46))
+    screen.blit(text_surface3, (10, 76))
+    screen.blit(text_surface4, (10, 106))
 
-    # Mettre à jour l'affichage
     pygame.display.flip()
-
-
 
 pygame.quit()
