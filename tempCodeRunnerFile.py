@@ -1,1 +1,1 @@
-MOUSEBUTTONDOWN
+time

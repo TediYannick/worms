@@ -15,3 +15,5 @@ def trajectoire(start_x, start_y, power, angle_deg, num_points):
         y = start_y - (power * math.sin(math.radians(angle_deg)) * time - 0.5 * 9.8 * time ** 2)
         trajectory_points.append((x, y))
     return trajectory_points
+
+

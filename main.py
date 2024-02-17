@@ -39,7 +39,7 @@ while running:
                 player.move_right()
             elif event.key == pygame.K_SPACE:  
                 player.jump()
-            elif event.key == pygame.K_a:  # Touche A pour changer l'état de l'arme
+            elif event.key == pygame.K_a:  # Touche A pour l'arme
                 arme = not arme
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT:  
@@ -52,12 +52,14 @@ while running:
                 power += 1
             elif event.button == 5 and power >= 2:  
                 power -= 1
-            elif event.button == pygame.BUTTON_LEFT and arme == True:
-                # Créer un projectile avec la puissance actuelle
-                grenade = Grenade(player.rect.x, player.rect.y, power, angle_deg, screen)
-            elif event.button == pygame.BUTTON_LEFT and arme == False:
-                # Créer un projectile avec la puissance actuelle
-                roquette = Roquette(player.rect.x, player.rect.y, power, angle_deg, screen)
+            elif event.button == pygame.BUTTON_LEFT:
+                if arme:
+                    grenade = Grenade(player.rect.x, player.rect.y, power, angle_deg, screen)
+                    roquette = None
+                else:
+                    roquette = Roquette(player.rect.x, player.rect.y, power, angle_deg, screen)
+                    grenade = None 
+
         
 
     player.update()
@@ -75,7 +77,7 @@ while running:
 
     trajectoire_points = trajectoire(player.rect.x, player.rect.y, power, angle_deg, 100)
     for point in trajectoire_points:
-        pygame.draw.circle(screen, (0, 0, 255), (int(point[0]), int(point[1])), 2)
+        pygame.draw.circle(screen, (0, 0, 0), (int(point[0]), int(point[1])), 2)
 
 
     text_surface1 = font.render(f"Position: ({player.rect.x}, {player.rect.y})", True, (255, 0, 0))
