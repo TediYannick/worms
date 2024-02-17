@@ -3,7 +3,7 @@ import math
 from player import Player
 from map import Map
 from tools import *
-from projectile import Projectile
+from projectile import Grenade, Roquette
 
 pygame.init()
 
@@ -18,8 +18,10 @@ player = Player(screen)
 font = pygame.font.Font(None, 36)
 
 power = 50  
-projectile = None 
+grenade = None
+roquette = None 
 angle_deg = 0 
+arme = True
 
 running = True
 while running:
@@ -37,6 +39,8 @@ while running:
                 player.move_right()
             elif event.key == pygame.K_SPACE:  
                 player.jump()
+            elif event.key == pygame.K_a:  # Touche A pour changer l'état de l'arme
+                arme = not arme
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT:  
                 player.stop_left()
@@ -48,19 +52,26 @@ while running:
                 power += 1
             elif event.button == 5 and power >= 2:  
                 power -= 1
-            elif event.button == pygame.BUTTON_LEFT:
-                
+            elif event.button == pygame.BUTTON_LEFT and arme == True:
                 # Créer un projectile avec la puissance actuelle
-                projectile = Projectile(player.rect.x, player.rect.y, power, angle_deg, screen)
+                grenade = Grenade(player.rect.x, player.rect.y, power, angle_deg, screen)
+            elif event.button == pygame.BUTTON_LEFT and arme == False:
+                # Créer un projectile avec la puissance actuelle
+                roquette = Roquette(player.rect.x, player.rect.y, power, angle_deg, screen)
+        
 
     player.update()
     game_map.draw()
     player.draw()
     
     
-    if projectile:
-        projectile.update()
-        projectile.draw(screen)
+    if grenade:
+        grenade.update()
+        grenade.draw(screen)
+    elif roquette:
+        roquette.update()
+        roquette.draw(screen)
+
 
     trajectoire_points = trajectoire(player.rect.x, player.rect.y, power, angle_deg, 100)
     for point in trajectoire_points:
@@ -71,11 +82,14 @@ while running:
     text_surface2 = font.render(f"Position souris: ({pygame.mouse.get_pos()[0]}, { pygame.mouse.get_pos()[1]})", True, (255, 0, 0))
     text_surface3 = font.render(f"angle°: ({round(angle_deg)}°)", True, (255, 0, 0))
     text_surface4 = font.render(f"power: ({power} % )", True, (255, 0, 0))
+    text_surface5 = font.render(f"arme: {'grenade' if arme else 'roquette'}", True, (255, 0, 0))
+
 
     screen.blit(text_surface1, (10, 10))
     screen.blit(text_surface2, (10, 46))
     screen.blit(text_surface3, (10, 76))
     screen.blit(text_surface4, (10, 106))
+    screen.blit(text_surface5, (10, 142))
 
     pygame.display.flip()
 

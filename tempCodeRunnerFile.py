@@ -1,2 +1,1 @@
-projectile.update()
-        projectile.draw(screen)
+MOUSEBUTTONDOWN
