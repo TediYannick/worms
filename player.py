@@ -10,8 +10,8 @@ class Player:
         self.rect.bottom = screen.get_height() // 2
         self.velocity_y = 0
         self.gravity = 0.5
-        self.is_moving_left = False  # Nouvel attribut pour suivre l'état de déplacement à gauche
-        self.is_moving_right = False  # Nouvel attribut pour suivre l'état de déplacement à droite
+        self.is_moving_left = False  
+        self.is_moving_right = False  
 
     def update(self):
         self.velocity_y += self.gravity
@@ -21,22 +21,21 @@ class Player:
             self.rect.bottom = self.screen.get_height() // 1.5
             self.velocity_y = 0
 
-        if self.is_moving_left and self.rect.x >= 0:  # Vérifie si la touche de déplacement à gauche est enfoncée
+        if self.is_moving_left and self.rect.x >= 0:  
             self.rect.x -= 5
-        if self.is_moving_right and self.rect.x <= self.screen.get_width() - 32:  # Vérifie si la touche de déplacement à droite est enfoncée
+        if self.is_moving_right and self.rect.x <= self.screen.get_width() - 32: 
             self.rect.x += 5
 
     def move_left(self):
-        self.is_moving_left = True  # Met à True lorsque la touche est enfoncée
+        self.is_moving_left = True  
 
     def move_right(self):
-        self.is_moving_right = True  # Met à True lorsque la touche est enfoncée
-
+        self.is_moving_right = True  
     def stop_left(self):
-        self.is_moving_left = False  # Met à False lorsque la touche est relâchée
+        self.is_moving_left = False  
 
     def stop_right(self):
-        self.is_moving_right = False  # Met à False lorsque la touche est relâchée
+        self.is_moving_right = False  
 
     def jump(self):
         if self.rect.bottom == self.screen.get_height() // 1.5:
