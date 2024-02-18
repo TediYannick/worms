@@ -1,1 +1,1 @@
-actions_remaining
+current_player

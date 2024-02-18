@@ -1,12 +1,13 @@
 import pygame
 import random
+import os
 
 class Player:
     def __init__(self, screen, name):
         self.name = name
         self.screen = screen
-        self.image = pygame.Surface((32, 32))
-        self.image.fill((255, 0, 0))
+        self.image = pygame.image.load(os.path.join('assets/Imageworms/', 'w1.png')).convert_alpha()
+        self.rect = self.image.get_rect()
         self.rect = self.image.get_rect()
         self.rect.centerx = random.randint(0, screen.get_width())
         self.rect.bottom = random.randint(screen.get_height() // 2, screen.get_height())
@@ -15,6 +16,7 @@ class Player:
         self.is_moving_left = False  
         self.is_moving_right = False
         self.actions_remaining = 7
+        
 
     def __str__(self):
             return self.name
@@ -32,6 +34,7 @@ class Player:
         if self.is_moving_right and self.rect.x <= self.screen.get_width() - 32: 
             self.rect.x += 5
 
+
     def move_left(self):
         self.is_moving_left = True  
 
@@ -48,4 +51,11 @@ class Player:
             self.velocity_y = -10
 
     def draw(self):
-        self.screen.blit(self.image, self.rect)
+        #elf.screen.blit(self.image, self.rect)
+        if self.is_moving_left:
+            flipped_image = pygame.transform.flip(self.image, True, False)  # Retourner horizontalement
+            self.screen.blit(flipped_image, self.rect)
+        else:
+            self.screen.blit(self.image, self.rect)
+
+ 
