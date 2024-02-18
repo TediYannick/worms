@@ -1,17 +1,23 @@
 import pygame
+import random
 
 class Player:
-    def __init__(self, screen):
+    def __init__(self, screen, name):
+        self.name = name
         self.screen = screen
         self.image = pygame.Surface((32, 32))
         self.image.fill((255, 0, 0))
         self.rect = self.image.get_rect()
-        self.rect.centerx = screen.get_width() // 2
-        self.rect.bottom = screen.get_height() // 2
+        self.rect.centerx = random.randint(0, screen.get_width())
+        self.rect.bottom = random.randint(screen.get_height() // 2, screen.get_height())
         self.velocity_y = 0
         self.gravity = 0.5
         self.is_moving_left = False  
-        self.is_moving_right = False  
+        self.is_moving_right = False
+        self.actions_remaining = 7
+
+    def __str__(self):
+            return self.name
 
     def update(self):
         self.velocity_y += self.gravity

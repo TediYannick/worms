@@ -1,1 +1,1 @@
-time
+actions_remaining
