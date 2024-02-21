@@ -28,7 +28,10 @@ angle_deg = 0
 arme = True
 win = False
 
+
 running = True
+
+
 while running:
     for event in pygame.event.get():
         

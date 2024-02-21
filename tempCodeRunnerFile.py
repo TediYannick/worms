@@ -1,1 +1,1 @@
-current_player
+power

@@ -15,6 +15,7 @@ class Player:
         self.gravity = 0.5
         self.is_moving_left = False  
         self.is_moving_right = False
+        self.is_left = True
         self.actions_remaining = 7
         
 
@@ -37,14 +38,17 @@ class Player:
 
     def move_left(self):
         self.is_moving_left = True  
-
+        self.is_left = True
     def move_right(self):
-        self.is_moving_right = True  
+        self.is_moving_right = True
+        self.is_left = False  
     def stop_left(self):
-        self.is_moving_left = False  
+        self.is_moving_left = False
+        
 
     def stop_right(self):
-        self.is_moving_right = False  
+        self.is_moving_right = False
+          
 
     def jump(self):
         if self.rect.bottom == self.screen.get_height() // 1.5:
@@ -52,7 +56,7 @@ class Player:
 
     def draw(self):
         #elf.screen.blit(self.image, self.rect)
-        if self.is_moving_left:
+        if self.is_left:
             flipped_image = pygame.transform.flip(self.image, True, False)  # Retourner horizontalement
             self.screen.blit(flipped_image, self.rect)
         else:

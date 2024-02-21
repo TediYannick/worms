@@ -28,9 +28,9 @@ class Grenade:
         
         
 
-        if self.y >= self.screen.get_height() // 1.5:
-            self.y = self.screen.get_height() // 1.5  
-            self.vel_y = -self.vel_y * 0.8  # Inverser la vitesse verticale pour simuler le rebond + amortissemnt de 20%
+        if self.y >= (self.screen.get_height() - 32) // 1.5:
+            self.y = (self.screen.get_height() - 32) // 1.5  
+            self.vel_y = -self.vel_y * 0.8  
         elif self.time >= self.explosion_time:
             self.explosion_center = (self.x, self.y)
             self.destroy()
@@ -67,7 +67,7 @@ class Roquette:
         self.gravity = 9.8 
         self.wind = 20.0  
         self.time = 0
-        self.time_increment = 0.1
+        self.time_increment = 0.3
 
     def update(self):
         self.x += (self.vel_x + self.wind) * self.time_increment  
