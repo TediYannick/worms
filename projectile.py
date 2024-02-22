@@ -33,6 +33,7 @@ class Grenade:
             self.vel_y = -self.vel_y * 0.8  
         elif self.time >= self.explosion_time:
             self.explosion_center = (self.x, self.y)
+            self.explosion()
             self.destroy()
             
 
@@ -44,6 +45,8 @@ class Grenade:
                 flipped_image = pygame.transform.flip(self.image, True, False)  # Retourner horizontalement
                 screen.blit(flipped_image, (int(self.x), int(self.y)))
 
+    def explosion(self):
+        pygame.draw.circle(self.screen, (255, 128, 0), self.explosion_center, self.explosion_radius)
 
     def destroy(self):
         self.active = False
@@ -78,6 +81,7 @@ class Roquette:
 
         if self.y >= self.screen.get_height() // 1.5:
             self.explosion_center = (self.x, self.y)
+            self.explosion()
             self.destroy()
 
 
@@ -89,6 +93,9 @@ class Roquette:
                 
                 flipped_image = pygame.transform.flip(self.image, True, False)  # Retourner horizontalement
                 screen.blit(flipped_image, (int(self.x), int(self.y)))
+
+    def explosion(self):
+        pygame.draw.circle(self.screen, (255, 128, 0), self.explosion_center, self.explosion_radius)
 
     def destroy(self):
         self.active = False

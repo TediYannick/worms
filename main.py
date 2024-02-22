@@ -126,9 +126,9 @@ while running:
             pygame.draw.circle(screen, (0, 0, 0), (int(point[0]), int(point[1])), 2)
 
 
-        #text_surface1 = font.render(f"Position: ({current_player.rect.x}, {current_player.rect.y})", True, (255, 0, 0))
-        #text_surface2 = font.render(f"Position souris: ({pygame.mouse.get_pos()[0]}, { pygame.mouse.get_pos()[1]})", True, (255, 0, 0))
-        #text_surface3 = font.render(f"angle°: ({round(angle_deg)}°)", True, (255, 0, 0))
+        text_surface1 = font.render(f"Position: ({current_player.rect.x}, {current_player.rect.y})", True, (255, 0, 0))
+        text_surface2 = font.render(f"Position souris: ({pygame.mouse.get_pos()[0]}, { pygame.mouse.get_pos()[1]})", True, (255, 0, 0))
+        text_surface3 = font.render(f"angle°: ({round(angle_deg)}°)", True, (255, 0, 0))
         text_surface4 = font.render(f"action restante du {current_player}: ({current_player.actions_remaining})", True, (255, 0, 0))
         text_surface5 = font.render(f"arme: {'grenade' if arme else 'roquette'}", True, (255, 0, 0))
         text_surface6 = font.render(f"power: ({power} % )", True, (255, 0, 0))
@@ -136,9 +136,9 @@ while running:
         
 
 
-        #screen.blit(text_surface1, (10, 10))
-        #screen.blit(text_surface2, (10, 46))
-        #screen.blit(text_surface3, (10, 76))
+        #screen.blit(text_surface1, (10, 118))
+        #screen.blit(text_surface2, (10, 154))
+        #screen.blit(text_surface3, (10, 190))
         screen.blit(text_surface4, (10, 10))
         screen.blit(text_surface5, (10, 46))
         screen.blit(text_surface6, (10, 82))
