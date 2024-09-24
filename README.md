@@ -1,6 +1,6 @@
 # Recréation de Worms avec Pygame
 
-Ce projet consiste à recréer le célèbre jeu *Worms* en utilisant Python et Pygame, avec un objectif éducatif centré sur l'application des équations de trajectoire. Le projet inclut un système de vent qui influence la trajectoire des projectiles, simulant des conditions de tir réalistes.
+Ce projet consiste à recréer le célèbre jeu *Worms* en utilisant Python et Pygame, avec un objectif centré sur l'application des équations de trajectoire. Le projet inclut un système de vent qui influence la trajectoire des projectiles, simulant des conditions de tir réalistes.
 
 ## Objectifs du projet
 
