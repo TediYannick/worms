@@ -19,5 +19,5 @@ Ce projet consiste à recréer le célèbre jeu *Worms* en utilisant Python et P
 - **Python** : Langage de programmation principal.
 - **Pygame** : Bibliothèque utilisée pour gérer les graphiques, l'audio, et les événements de jeu en temps réel.
 
-![Worms Game Screenshot](images/worms_game_example.png)
+![Worms Game Screenshot](worms_game_example.png)
 
